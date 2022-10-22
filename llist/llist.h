@@ -1,10 +1,12 @@
 #ifndef LLIST_H
 # define LLIST_H
 
+#include <stdlib.h>
+
 typedef struct s_llist
 {
 	void	*content;
-	t_llist	*next;
+	struct s_llist	*next;
 }			t_llist;
 
 t_llist	*llist_new(void *content);

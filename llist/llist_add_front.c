@@ -4,7 +4,7 @@ void	llist_add_front(t_llist **lst, t_llist *new)
 {
 	t_llist *head;
 
-	head = lst[0];
+	head = *lst;
 	new->next = head;
-	lst[0] = new;
+	*lst = new;
 }

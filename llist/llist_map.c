@@ -2,18 +2,19 @@
 
 t_llist	*llist_map(t_llist *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_llist	*old_head;
-	t_llist	*old;
-	t_llist	*new;
+	t_llist *head;
+	t_llist *new;
 
-	old_head = lst;
-	new = llist_new(f(old_head->content));
-	while (old_head != 0)
+	while (lst != NULL)
 	{
-		old = old_head;
-		old_head = old_head->next;
-		llist_delone(old, del);
-		llist_add_back(new, llist_new(old_head->content));
+		new = llist_new(f(lst->content));
+		if (new == NULL)
+		{
+			llist_clear(&head, del);
+			return (NULL);
+		}
+		llist_add_back(&head, new);
+		lst = lst->next;
 	}
-	return (new);
+	return (head);
 }

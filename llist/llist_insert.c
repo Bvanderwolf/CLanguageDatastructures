@@ -13,7 +13,7 @@ void	llist_insert(t_llist **lst, t_llist *new, unsigned int position)
 		count++;
 		if (count == position)
 		{
-			if (previous != 0)
+			if (previous != NULL)
 				previous->next = new;
 			new->next = current;
 		}
