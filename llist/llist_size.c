@@ -7,7 +7,7 @@ int		llist_size(t_llist *lst)
 
 	count = 0;
 	current = lst;
-	while (current != 0)
+	while (current != NULL)
 	{
 		count++;
 		current = current->next;

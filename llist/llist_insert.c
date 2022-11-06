@@ -2,9 +2,9 @@
 
 void	llist_insert(t_llist **lst, t_llist *new, unsigned int position)
 {
-	int		count;
-	t_llist	*current;
-	t_llist	*previous;
+	unsigned int	count;
+	t_llist			*current;
+	t_llist			*previous;
 
 	count = 0;
 	current = lst[0];
