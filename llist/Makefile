@@ -4,7 +4,7 @@ SOURCES = ${wildcard *.c}
 
 OBJECTS = ${SOURCES:.c=.o}
 
-RM = rm -r
+RM = rm -rf
 
 all: ${OBJECTS}
 	gcc -Wall -Werror -Wextra -o ${NAME} ${OBJECTS}
@@ -14,3 +14,5 @@ clean:
 
 fclean: clean
 	${RM} ${NAME}
+
+re: fclean all
