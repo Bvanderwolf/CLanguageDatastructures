@@ -7,7 +7,7 @@ t_llist	*llist_last(t_llist *lst)
 	last = lst;
 	while (last != NULL)
 	{
-		if (last->next == 0)
+		if (last->next == NULL)
 			return (last);
 		last = last->next;
 	}

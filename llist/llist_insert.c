@@ -2,24 +2,18 @@
 
 void	llist_insert(t_llist **lst, t_llist *new, unsigned int position)
 {
-	unsigned int	count;
-	t_llist			*current;
-	t_llist			*previous;
+	t_llist	*previous;
+	t_llist	*next;
 
-	count = 0;
-	current = lst[0];
-	while (current != 0 && count < position)
+	if (position > 1)
 	{
-		count++;
-		if (count == position)
-		{
-			if (previous != NULL)
-				previous->next = new;
-			new->next = current;
-		}
-		previous = current;
-		current = current->next;
+		previous = llist_find(lst, position - 1);
+		next = previous->next;
+		previous->next = new;
 	}
-	if (position == 1)
-		lst[0] = new;
+	else
+	{
+		next = *lst;
+	}
+	new->next = next;
 }

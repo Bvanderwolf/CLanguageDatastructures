@@ -8,6 +8,6 @@ t_llist	*llist_new(void *content)
 	if (new == NULL)
 		return (NULL);
 	new->content = content;
-	new->next = 0;
+	new->next = NULL;
 	return (new);
 }
