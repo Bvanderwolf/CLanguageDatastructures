@@ -22,7 +22,7 @@ void	llist_delone(t_llist *lst, void (*del)(void *));
 void	llist_clear(t_llist **lst, void (*del)(void *));
 void	llist_trim_front(t_llist **lst, void (*del)(void *));
 void	llist_trim_back(t_llist **lst, void (*del)(void *));
-void	llist_remove_at(t_llist **lst, void (*del)(void), unsigned int position);
+void	llist_remove_at(t_llist **lst, void (*del)(void *), unsigned int position);
 
 /* Query */
 

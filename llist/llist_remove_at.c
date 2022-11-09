@@ -1,6 +1,6 @@
 #include "llist.h"
 
-void	llist_remove_at(t_llist **lst, void (*del)(void), unsigned int position)
+void	llist_remove_at(t_llist **lst, void (*del)(void *), unsigned int position)
 {
 	t_llist	*previous;
 	t_llist *next;

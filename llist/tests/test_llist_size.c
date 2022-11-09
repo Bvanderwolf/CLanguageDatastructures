@@ -82,13 +82,9 @@ static MunitResult test_size(const MunitParameter params[], void* data)
 	return (MUNIT_SKIP);
 }
 
-static MunitTest tests[] = {
+static MunitTest lst_size_tests[] = {
 	{ "/llist_size", test_size, NULL, NULL, MUNIT_TEST_OPTION_NONE, llist_size_params },
 	{ NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };
 
-int main(int argc, char* argv[MUNIT_ARRAY_PARAM(argc + 1)]) {
-	const MunitSuite suite = { "llist", tests, NULL, 1, MUNIT_SUITE_OPTION_NONE };
-  	return munit_suite_main(&suite, NULL, argc, argv);
-}
-
+MunitSuite llist_size_suite = { "llist", lst_size_tests, NULL, 1, MUNIT_SUITE_OPTION_NONE };

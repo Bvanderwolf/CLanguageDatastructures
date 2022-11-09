@@ -7,7 +7,7 @@ void	llist_insert(t_llist **lst, t_llist *new, unsigned int position)
 
 	if (position > 1)
 	{
-		previous = llist_find(lst, position - 1);
+		previous = llist_find(*lst, position - 1);
 		next = previous->next;
 		previous->next = new;
 	}
