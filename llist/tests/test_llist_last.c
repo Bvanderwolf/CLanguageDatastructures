@@ -6,21 +6,19 @@ static char	*params[] = {
 	"0", "1", "25", "100", "random", NULL
 };
 
-static MunitParameterEnum	llist_size_params[] = {
+static MunitParameterEnum	llist_last_params[] = {
 	{ "size", params },
 	{ NULL, NULL }
 };
 
 static MunitResult test_size_null()
 {
-	t_llist		*lst;
-	int			actual;
-	int			expected;
+	t_llist	*lst;
+	t_llist	*actual;
 
 	lst = NULL;
-	actual = llist_size(lst);
-	expected = 0;
-	munit_assert_int16(actual, ==, expected);
+	actual = llist_last(lst);
+	munit_assert_null(actual);
 	return (MUNIT_OK);
 }
 
@@ -28,13 +26,12 @@ static MunitResult test_custom_size(int size)
 {
 	t_llist		*lst;
 	t_llist		*new;
+	t_llist		*expected;
+	t_llist		*actual;
 	int			count;
-	int			expected;
-	int			actual;
 
 	lst = NULL;
 	count = 0;
-	expected = size;
 	while (count < size)
 	{
 		new = llist_new(strdup("content"));
@@ -45,9 +42,11 @@ static MunitResult test_custom_size(int size)
 		}
 		llist_add_back(&lst, new);
 		count++;
+		if (count == size)
+			expected = new;
 	}
-	actual = llist_size(lst);
-	munit_assert_int16(actual, ==, expected);
+	actual = llist_last(lst);
+	munit_assert_ptr_equal(actual, expected);
 	llist_clear(&lst, &free);
 	return (MUNIT_OK);
 }
@@ -60,7 +59,7 @@ static MunitResult test_random_size()
 	return (test_custom_size(size));
 }
 
-static MunitResult test_size(const MunitParameter params[], void* data)
+static MunitResult test_last(const MunitParameter params[], void* data)
 {
 	const char	*param;
 
@@ -82,9 +81,9 @@ static MunitResult test_size(const MunitParameter params[], void* data)
 	return (MUNIT_SKIP);
 }
 
-static MunitTest llist_size_tests[] = {
-	{ "/llist_size", test_size, NULL, NULL, MUNIT_TEST_OPTION_NONE, llist_size_params },
+static MunitTest	llist_last_tests[] = {
+	{ "/llist_last", test_last, NULL, NULL, MUNIT_TEST_OPTION_NONE, llist_last_params },
 	{ NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };
 
-MunitSuite llist_size_suite = { "llist", llist_size_tests, NULL, 1, MUNIT_SUITE_OPTION_NONE };
+MunitSuite llist_last_suite = { "llist", llist_last_tests, NULL, 1, MUNIT_SUITE_OPTION_NONE };
