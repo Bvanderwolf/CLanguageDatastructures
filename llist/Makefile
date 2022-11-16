@@ -4,7 +4,7 @@ SRC =		llist_add_back.c llist_add_front.c llist_insert.c \
 			llist_new.c llist_size.c llist_find.c  
 
 TEST_SRC = 	tests/test_llist_size.c tests/test_llist_new.c tests/test_llist_last.c \
-			tests/test_llist_find.c \
+			tests/test_llist_find.c tests/test_llist_add_front.c\
 			tests/test_main.c \
 			tests/test_utils.c \
 			../munit/munit.c
