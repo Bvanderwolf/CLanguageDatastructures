@@ -83,6 +83,47 @@ static MunitResult	test_early_return(int size, int position)
 	return (MUNIT_ERROR);
 }
 
+static MunitResult	test_out_of_bounds(int size, int position)
+{
+	t_llist	*lst;
+	t_llist	*actual;
+
+	lst = generate_test_list(size);
+	actual = llist_find(lst, position);
+	munit_assert_ptr_null(actual);
+	llist_clear(&lst, &free);
+	return (MUNIT_OK);
+}
+
+static MunitResult	test_within_bounds(int size, int position)
+{
+	t_llist		*lst;
+	t_llist		*new;
+	t_llist		*expected;
+	t_llist		*actual;
+	int			count;
+
+	lst = NULL;
+	count = 0;
+	while (count < size)
+	{
+		new = llist_new(strdup("content"));
+		if (new == NULL)
+		{
+			llist_clear(&lst, &free);
+			return (MUNIT_ERROR);
+		}
+		llist_add_back(&lst, new);
+		count++;
+		if (count == position)
+			expected = new;
+	}
+	actual = llist_find(lst, position);
+	munit_assert_ptr_equal(actual, expected);
+	llist_clear(&lst, &free);
+	return (MUNIT_OK);
+}
+
 static MunitResult	test_find(const MunitParameter params[], void* data)
 {
 	const char	*size_param;
@@ -101,6 +142,9 @@ static MunitResult	test_find(const MunitParameter params[], void* data)
 		return (MUNIT_ERROR);
 	if (pos_value <= 1)
 		return (test_early_return(size_value, pos_value));
+	if (pos_value > size_value)
+		return (test_out_of_bounds(size_value, pos_value));
+	test_within_bounds(size_value, pos_value);
 	return (MUNIT_OK);
 }
 

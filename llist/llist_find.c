@@ -10,13 +10,13 @@ t_llist	*llist_find(t_llist *lst, unsigned int position)
 	if (position == 1)
 		return (lst);
 	current = lst;
-	count = 0U;
+	count = 1U;
 	while (count < position && current != NULL)
 	{
 		count++;
 		current = current->next;
 	}
-	if (count != position)
-		return (NULL);
-	return (current);
+	if (count == position)
+		return (current);
+	return (NULL);
 }
