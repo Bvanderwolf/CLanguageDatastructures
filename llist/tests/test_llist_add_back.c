@@ -7,40 +7,44 @@ static char	*size_params[] = {
 	"0", "1", "25", "100", "random", NULL
 };
 
-static MunitParameterEnum	llist_add_front_params[] = {
+static MunitParameterEnum	llist_add_back_params[] = {
 	{ "size", size_params },
 	{ NULL, NULL }
 };
 
-static MunitResult	test_llist(t_llist *lst)
+static MunitResult	test_empty()
 {
+	t_llist	*lst;
 	t_llist	*new;
 	
+	lst = NULL;
 	new = llist_new(strdup("content"));
 	if (new == NULL)
 		return (MUNIT_ERROR);
-	llist_add_front(&lst, new);
+	llist_add_back(&lst, new);
 	munit_assert_ptr_equal(lst, new);
 	llist_clear(&lst, &free);
 	return (MUNIT_OK);
 }
 
-static MunitResult	test_empty()
-{
-	return (test_llist((t_llist *)NULL));
-}
-
 static MunitResult	test_size(int size)
 {
 	t_llist	*lst;
+	t_llist	*new;
+	t_llist	*last;
 
 	lst = generate_test_list(size);
-	if (lst == NULL)
+	new = llist_new(strdup("content"));
+	if (new == NULL)
 		return (MUNIT_ERROR);
-	return (test_llist(lst));
+	llist_add_back(&lst, new);
+	last = llist_last(lst);
+	munit_assert_ptr_equal(last, new);
+	llist_clear(&lst, &free);
+	return (MUNIT_OK);
 }
 
-static MunitResult	test_add_front(const MunitParameter params[], void *data)
+static MunitResult	test_add_back(const MunitParameter params[], void *data)
 {
 	const char	*param;
 
@@ -61,9 +65,9 @@ static MunitResult	test_add_front(const MunitParameter params[], void *data)
 	return (MUNIT_OK);
 }
 
-static MunitTest	llist_add_front_tests[] = {
-	{ "/llist_add_front", test_add_front, NULL, NULL, MUNIT_TEST_OPTION_NONE, llist_add_front_params },
+static MunitTest	llist_add_back_tests[] = {
+	{ "/llist_add_back", test_add_back, NULL, NULL, MUNIT_TEST_OPTION_NONE, llist_add_back_params },
 	{ NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };
 
-MunitSuite llist_add_front_suite = { "llist", llist_add_front_tests, NULL, 1, MUNIT_SUITE_OPTION_NONE };
+MunitSuite llist_add_back_suite = { "llist", llist_add_back_tests, NULL, 1, MUNIT_SUITE_OPTION_NONE };

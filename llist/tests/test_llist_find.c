@@ -2,6 +2,7 @@
 #include "../llist.h"
 #include "test_llist.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 static char	*size_params[] = {
 	"0", "1", "25", "100", "random", NULL
