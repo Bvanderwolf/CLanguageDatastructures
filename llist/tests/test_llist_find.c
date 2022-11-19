@@ -2,7 +2,6 @@
 #include "../llist.h"
 #include "test_llist.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 static char	*size_params[] = {
 	"0", "1", "25", "100", "random", NULL
@@ -18,7 +17,7 @@ static MunitParameterEnum	llist_find_params[] = {
 	{ NULL, NULL }
 };
 
-int	get_position_value(const char *pos_param)
+static int	get_position_value(const char *pos_param)
 {
 	if (strcmp(pos_param, "-1") == 0)
 		return (-1);
@@ -33,7 +32,7 @@ int	get_position_value(const char *pos_param)
 	return (INT32_MAX);
 }
 
-int	get_size_value(const char *size_param)
+static int	get_size_value(const char *size_param)
 {
 	if (strcmp(size_param, "0") == 0)
 		return (0);
