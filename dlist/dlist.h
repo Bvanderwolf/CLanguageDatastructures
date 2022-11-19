@@ -11,9 +11,11 @@ typedef struct s_dlist
 }	t_dlist;
 
 t_dlist	*dlist_new(void *data);
+void	dlist_add_front(t_dlist **lst, t_dlist *new);
+void	dlist_add_back(t_dlist **lst, t_dlist *new);
 
 int		dlist_size(t_dlist *lst);
-t_dlist	*llist_last(t_dlist *lst);
-t_dlist	*llist_find(t_dlist *lst, unsigned int position);
+t_dlist	*dlist_last(t_dlist *lst);
+t_dlist	*dlist_find(t_dlist *lst, unsigned int position);
 
 #endif
