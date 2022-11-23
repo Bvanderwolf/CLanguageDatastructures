@@ -7,7 +7,7 @@ t_dlist	*dlist_new(void *data)
 	new = (t_dlist *)malloc(1 * sizeof(t_dlist));
 	if (new == NULL)
 		return (NULL);
-	new->data = data;
+	new->content = data;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

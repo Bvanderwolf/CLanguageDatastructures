@@ -1,6 +1,6 @@
 #include "dlist.h"
 
-t_dlist	*llist_find(t_dlist *lst, unsigned int position)
+t_dlist	*dlist_find(t_dlist *lst, unsigned int position)
 {
 	t_dlist			*current;
 	unsigned int	count;

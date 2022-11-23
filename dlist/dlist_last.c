@@ -1,6 +1,6 @@
 #include "dlist.h"
 
-t_dlist	*llist_last(t_dlist *lst)
+t_dlist	*dlist_last(t_dlist *lst)
 {
 	t_dlist	*last;
 
