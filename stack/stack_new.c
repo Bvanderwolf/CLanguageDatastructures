@@ -1,6 +1,8 @@
 #include "stack.h"
 
-t_stack	*stack_new()
+// test case: () -> t_stack*
+
+t_stack	*stack_new(void)
 {
 	t_stack	*stack;
 

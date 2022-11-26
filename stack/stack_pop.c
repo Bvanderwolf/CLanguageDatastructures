@@ -1,5 +1,10 @@
 #include "stack.h"
 
+// test case: (NULL)				-> Segfault
+// test case: (stack[0])			-> NULL
+// test case: (stack[1] {""})		-> ""
+// test case: (stack[2] {"a", "b"})	-> "b"
+
 void	*stack_pop(t_stack *stack)
 {
 	void	*content;

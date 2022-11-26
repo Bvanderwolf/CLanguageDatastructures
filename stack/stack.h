@@ -9,9 +9,9 @@ typedef struct s_stack
 	t_llist	*head;
 }	t_stack;
 
-t_stack	*stack_new();
+t_stack	*stack_new(void);
 int		stack_push(t_stack *stack, void	*content);
 void	*stack_pop(t_stack *stack);
-void	stack_clear(t_stack *stack);
+void	stack_clear(t_stack *stack, void (*del)(void *));
 
 #endif
