@@ -17,35 +17,35 @@ static MunitParameterEnum	llist_insert_params[] = {
 	{ NULL, NULL }
 };
 
-static int	get_position_value(const char *pos_param)
-{
-	if (strcmp(pos_param, "-1") == 0)
-		return (-1);
-	if (strcmp(pos_param, "0") == 0)
-		return (0);
-	if (strcmp(pos_param, "1") == 0)
-		return (1);
-	if (strcmp(pos_param, "25") == 0)
-		return (25);
-	if (strcmp(pos_param, "100") == 0)
-		return (100);
-	return (INT32_MAX);
-}
+// static int	get_position_value(const char *pos_param)
+// {
+// 	if (strcmp(pos_param, "-1") == 0)
+// 		return (-1);
+// 	if (strcmp(pos_param, "0") == 0)
+// 		return (0);
+// 	if (strcmp(pos_param, "1") == 0)
+// 		return (1);
+// 	if (strcmp(pos_param, "25") == 0)
+// 		return (25);
+// 	if (strcmp(pos_param, "100") == 0)
+// 		return (100);
+// 	return (INT32_MAX);
+// }
 
-static int	get_size_value(const char *size_param)
-{
-	if (strcmp(size_param, "0") == 0)
-		return (0);
-	if (strcmp(size_param, "1") == 0)
-		return (1);
-	if (strcmp(size_param, "25") == 0)
-		return (25);
-	if (strcmp(size_param, "100") == 0)
-		return (100);
-	if (strcmp(size_param, "random") == 0)
-		return (munit_rand_int_range(1, 1000));
-	return (INT32_MAX);
-}
+// static int	get_size_value(const char *size_param)
+// {
+// 	if (strcmp(size_param, "0") == 0)
+// 		return (0);
+// 	if (strcmp(size_param, "1") == 0)
+// 		return (1);
+// 	if (strcmp(size_param, "25") == 0)
+// 		return (25);
+// 	if (strcmp(size_param, "100") == 0)
+// 		return (100);
+// 	if (strcmp(size_param, "random") == 0)
+// 		return (munit_rand_int_range(1, 1000));
+// 	return (INT32_MAX);
+// }
 
 static MunitResult	test_insert(const MunitParameter params[], void *data)
 {
