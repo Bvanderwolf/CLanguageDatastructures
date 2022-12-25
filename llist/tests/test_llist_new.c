@@ -7,7 +7,7 @@ static char	*params[] = {
 	"new", NULL
 };
 
-static MunitParameterEnum llist_new_params[] = {
+static MunitParameterEnum stack_new_params[] = {
 	{ "value", params },
 	{ NULL, NULL }
 };
@@ -27,9 +27,9 @@ static MunitResult test_new(const MunitParameter params[], void *data)
 	return (MUNIT_OK);
 }
 
-static MunitTest llist_new_tests[] = {
-	{ "/llist_new", test_new, NULL, NULL, MUNIT_TEST_OPTION_NONE, llist_new_params },
+static MunitTest stack_new_tests[] = {
+	{ "/llist_new", test_new, NULL, NULL, MUNIT_TEST_OPTION_NONE, stack_new_params },
 	{ NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };
 
-MunitSuite llist_new_suite = { "llist", llist_new_tests, NULL, 1, MUNIT_SUITE_OPTION_NONE };
+MunitSuite llist_new_suite = { "llist", stack_new_tests, NULL, 1, MUNIT_SUITE_OPTION_NONE };

@@ -1,0 +1,244 @@
+!<arch>
+//                                              94        `
+llist_add_back.c/
+llist_add_front.c/
+llist_remove_at.c/
+llist_trimback.c/
+llist_trimfront.c/
+
+/0              0           0     0     644     176       `
+#include "llist.h"
+
+void	llist_add_back(t_llist **lst, t_llist *new)
+{
+	if (*lst == NULL)
+	{
+		*lst = new;
+	}
+	else
+	{
+		llist_last(*lst)->next = new;
+		new->next = NULL;
+	}
+}
+/18             0           0     0     644     106       `
+#include "llist.h"
+
+void	llist_add_front(t_llist **lst, t_llist *new)
+{
+	new->next = *lst;
+	*lst = new;
+}
+llist_insert.c/ 0           0     0     644     296       `
+#include "llist.h"
+
+void	llist_insert(t_llist **lst, t_llist *new, unsigned int position)
+{
+	t_llist	*previous;
+	t_llist	*next;
+
+	if (position > 1)
+	{
+		previous = llist_find(*lst, position - 1);
+		next = previous->next;
+		previous->next = new;
+	}
+	else
+	{
+		next = *lst;
+	}
+	new->next = next;
+}
+llist_clear.c/  0           0     0     644     187       `
+#include "llist.h"
+
+void	llist_clear(t_llist **lst, void (*del)(void *))
+{
+	t_llist	*next;
+
+	while (*lst != NULL)
+	{
+		next = (*lst)->next;
+		llist_delone(*lst, del);
+		*lst = next;
+	}
+}
+
+llist_delone.c/ 0           0     0     644     109       `
+#include "llist.h"
+
+void	llist_delone(t_llist *lst, void (*del)(void *))
+{
+	del(lst->content);
+	free(lst);
+}
+
+/37             0           0     0     644     370       `
+#include "llist.h"
+
+void	llist_remove_at(t_llist **lst, void (*del)(void *), unsigned int position)
+{
+	t_llist	*previous;
+	t_llist *next;
+
+	if (position > 1)
+	{
+		previous = llist_find(*lst, position - 1);
+		next = previous->next;
+		previous->next = next->next;
+		llist_delone(next, del);
+	}
+	else
+	{
+		next = (*lst)->next;
+		llist_delone(*lst, del);
+		*lst = next;
+	}
+}/56             0           0     0     644     411       `
+#include "llist.h"
+
+void	llist_trim_back(t_llist **lst, void (*del)(void *))
+{
+	t_llist *previous;
+	t_llist *current;
+
+	previous = NULL;
+	current = *lst;
+	while (current != NULL)
+	{
+		if (current->next == NULL)
+			break;
+		previous = current;
+		current = current->next;
+	}
+	if (current == *lst)
+	{
+		llist_delone(*lst, del);
+		*lst = NULL;
+	}
+	else
+	{
+		previous->next = NULL;
+		llist_delone(current, del);
+	}
+}
+/74             0           0     0     644     160       `
+#include "llist.h"
+
+void	llist_trim_front(t_llist **lst, void (*del)(void *))
+{
+	t_llist *next;
+
+	next = (*lst)->next;
+	llist_delone(*lst, del);
+	*lst = next;
+}llist_iter.c/   0           0     0     644     181       `
+#include "llist.h"
+
+void	llist_iter(t_llist *lst, void (*f)(void *))
+{
+	t_llist	*current;
+
+	current = lst;
+	while (current != NULL)
+	{
+		f(current);
+		current = current->next;
+	}
+}
+
+llist_last.c/   0           0     0     644     197       `
+#include "llist.h"
+
+t_llist	*llist_last(t_llist *lst)
+{
+	t_llist	*last;
+
+	last = lst;
+	while (last != NULL)
+	{
+		if (last->next == NULL)
+			return (last);
+		last = last->next;
+	}
+	return (last);
+}
+
+llist_map.c/    0           0     0     644     331       `
+#include "llist.h"
+
+t_llist	*llist_map(t_llist *lst, void *(*f)(void *), void (*del)(void *))
+{
+	t_llist *head;
+	t_llist *new;
+
+	while (lst != NULL)
+	{
+		new = llist_new(f(lst->content));
+		if (new == NULL)
+		{
+			llist_clear(&head, del);
+			return (NULL);
+		}
+		llist_add_back(&head, new);
+		lst = lst->next;
+	}
+	return (head);
+}
+
+llist_new.c/    0           0     0     644     215       `
+#include "llist.h"
+
+t_llist	*llist_new(void *content)
+{
+	t_llist	*new;
+
+	new = (t_llist *)malloc(1 * sizeof(t_llist));
+	if (new == NULL)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
+}
+
+llist_size.c/   0           0     0     644     201       `
+#include "llist.h"
+
+int		llist_size(t_llist *lst)
+{
+	int		count;
+	t_llist	*current;
+
+	count = 0;
+	current = lst;
+	while (current != NULL)
+	{
+		count++;
+		current = current->next;
+	}
+	return (count);
+}
+
+llist_find.c/   0           0     0     644     373       `
+#include "llist.h"
+
+t_llist	*llist_find(t_llist *lst, unsigned int position)
+{
+	t_llist			*current;
+	unsigned int	count;
+
+	if (position < 1)
+		return (NULL);
+	if (position == 1)
+		return (lst);
+	current = lst;
+	count = 1U;
+	while (count < position && current != NULL)
+	{
+		count++;
+		current = current->next;
+	}
+	if (count == position)
+		return (current);
+	return (NULL);
+}

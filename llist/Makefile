@@ -12,3 +12,6 @@ TEST_SRC = 	tests/test_llist_size.c tests/test_llist_new.c tests/test_llist_last
 
 all: ${OBJECTS}
 	gcc -Wall -Werror -Wextra ${SRC} ${TEST_SRC}
+
+lib: ${OBJECTS}
+	ar -rcs -o llist.a ${SRC}
