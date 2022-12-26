@@ -14,6 +14,7 @@ void	llist_insert(t_llist **lst, t_llist *new, unsigned int position)
 	else
 	{
 		next = *lst;
+		*lst = new;
 	}
 	new->next = next;
 }
